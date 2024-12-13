@@ -8,13 +8,13 @@ const NavItems = () => {
     const [headerFixed, setHeaderFixed] = useState(false);
 
     // Add Event Listeer
-    window.addEventListener("scroll", () => {
-        if(window.scrollY > 200) {
-            setHeaderFixed(true);
-        } else {
-            setHeaderFixed(false)
+    const handleScroll = () => {
+        const scrollPosition = window.scrollY;
+        const threshold = 200;
+        setHeaderFixed(scrollPosition > threshold);
         }
-    })
+        
+    window.addEventListener("scroll", handleScroll);
   return (
     <header className={`header-section style-4 ${headerFixed ? "header-fixed fadeInUp" : ""}`}>
         <div className={`header-top d-md-none ${ socialToggle ? "open" : ""}`}>
@@ -48,6 +48,14 @@ const NavItems = () => {
                         </div>
                         <Link to={"/signup"} className='lab-btn me-3 d-none d-md-block'>Create Account</Link>
                         <Link to={"/login"} className='d-none d-md-block'>Log in</Link>
+                        <div onClick={() => setMenuToggle(!menuToggle)} className={`header-bar d-lg-none ${menuToggle ? "active" : ''} `}>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <div className='ellepsis-bar d-md-none' onClick={() => setSocialToggle(!socialToggle)}>
+                        <i className="icofont-info-square"></i>
+                        </div>
                     </div>
                 </div>
             </div>
